@@ -23,13 +23,14 @@ class SolrIndex(object):
 		data= json.dumps([data])
 		return self.__save_to_solr(data)
 
-	def search(self, fl=[], fq={}, rows=10):
+	def filter(self, fl=[], fq={}, rows=10, sort='', sort_order='DESC'):
 
 		params = {
 			'query' : '&q=*:*',
 			'fl'	: '&fl='+','.join(fl) if fl else '',
 			'rows'  : '&rows='+ str(rows),
-			'fq'	: self.__get_fq_params(fq) if fq else ''
+			'fq'	: self.__get_fq_params(fq) if fq else '',
+			'sort' 	: '&sort='+ sort + '+' + sort_order if sort else ''
 		}
 
 		endpoint= "/select?%s&wt=json&indent=true" % ''.join(params.values())

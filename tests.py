@@ -20,7 +20,7 @@ class Test_SolrIndex(unittest.TestCase):
 		#verify that the title has been updated
 		self.assertEqual(new_data['title'], data['title'])
 
-	def test_SolrSearch(self):
+	def test_SolrFacetedQuerySearch(self):
 		solr_obj = SolrIndex('blogs')
 		blogs = solr_obj.filter(
 			fl=['id','title','slug'],
@@ -68,3 +68,21 @@ class Test_SolrIndex(unittest.TestCase):
 		check_reverse_sort.sort(reverse=True)
 
 		self.assertEquals(blog_ids, check_reverse_sort)
+
+	def test_SolrGeneralSearch(self):
+
+		solr_obj = SolrIndex('blogs')
+		print solr_obj.filter(
+			fl=['id'],
+			search_term="red roses",
+			qf=['title', 'lead_in']
+		)
+
+	def test_SolrBoostedSearch(self):
+
+		solr_obj = SolrIndex('blogs')
+		print solr_obj.filter(
+			fl=['id'],
+			search_term="red roses",
+			qf=['title^0.2','lead_in^0.8']
+		)

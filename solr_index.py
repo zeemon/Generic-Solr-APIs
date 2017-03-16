@@ -23,10 +23,10 @@ class SolrIndex(object):
 		data= json.dumps([data])
 		return self.__save_to_solr(data)
 
-	def filter(self, fl=[], fq={}, rows=10, sort='', sort_order='DESC'):
+	def filter(self, fl=[], fq={}, rows=10, sort='', sort_order='DESC', search_term='', qf=[]):
 
 		params = {
-			'query' : '&q=*:*',
+			'query' : self.__get_query_params(search_term, qf) if search_term else '&q=*:*',
 			'fl'	: '&fl='+','.join(fl) if fl else '',
 			'rows'  : '&rows='+ str(rows),
 			'fq'	: self.__get_fq_params(fq) if fq else '',
@@ -45,6 +45,19 @@ class SolrIndex(object):
 		for key, value in fq.items():
 			fq_params +='&fq=%s:"%s"' % (key, urllib.quote_plus(value))
 		return fq_params
+
+	def __get_query_params(self, search_term, qf):
+
+		if not qf:
+			raise ValueError("query fields must be defined if a search term is passed")
+
+		query_params='&q=('+urllib.quote_plus(search_term)+')'
+		query_params += "&mm=2&pf=search&ps=1&qs=1&defType=dismax"
+		query_params += '&qf='
+		for q in qf:
+			query_params += "+"+q
+
+		return query_params
 
 	def __solr_request_object(self, endpoint):
 		full_url= self.SOLR_URL+self.core+endpoint

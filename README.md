@@ -1,12 +1,11 @@
 # Generic-Solr-APIs
 
 *Easy-to-use generic apis for <a href="http://www.theserverside.com/definition/Apache-Solr">Apache Solr</a> integration with python projects* <br>
-*Lightweight | No Dependencies | Pure Python*
+*Lightweight * No Dependencies * Pure Python*
 <br>
 
 **How to use:**
-* Create your solr cores<br>
-  example : blogs
+* Create your solr cores | example : blogs
   
 * Define your solr base url in the class **SolrIndex** <br>
   `SOLR_URL = 'http://localhost:8983/solr/'`

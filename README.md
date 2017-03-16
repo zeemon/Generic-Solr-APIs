@@ -1,6 +1,7 @@
 # Generic-Solr-APIs
 
 *Easy-to-use generic apis for <a href="http://www.theserverside.com/definition/Apache-Solr">Apache Solr</a> integration with python projects* <br>
+*Lightweight | No Dependencies | Pure Python*
 <br>
 
 **How to use:**

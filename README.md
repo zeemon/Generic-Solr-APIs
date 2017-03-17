@@ -5,7 +5,7 @@
 <br>
 
 **How to use:**
-* Create your solr cores | example : blogs
+* Create your solr cores - example : blogs
   
 * Define your solr base url in the class **SolrIndex** <br>
   `SOLR_URL = 'http://localhost:8983/solr/'`
@@ -76,10 +76,10 @@
   * **fq** : *faceted query* : this is used to get results based on particular fields. <br>
     example where title like 'red roses' and country = 'india' <br>
     `fq: { title : 'red roses', country: 'india' }`
-   * **rows**: how many results to return | defaults to `10`
+   * **rows**: how many results to return - defaults to `10`
    * **sort**: which field to sort by `sort: 'title'`
-   * **sort_order**: `asc` or `desc` | defaults to `desc`
-   * **fl**: *fields list* : a list of fields that will be returned from solr | defaults to all fields
+   * **sort_order**: `asc` or `desc` - defaults to `desc`
+   * **fl**: *fields list* : a list of fields that will be returned from solr - defaults to all fields
    * **search_term** : generic search term. this term will be searched in one/more query fields (`qf`) that you specify.<br>
      when using search_term parameter, it is compulsory to specify which all fields to search in. this is done using the `qf` parameter which takes a list of fields.<br>
      following example will search for red roses in title & description fields in solr<br>
